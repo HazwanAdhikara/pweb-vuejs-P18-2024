@@ -35,6 +35,9 @@ export default {
       this.isLoading = false;
     }
   },
+  components: {
+    Book,
+  },
 }
 </script>
 
