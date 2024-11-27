@@ -4,7 +4,7 @@ import AddBookView from "../views/AddBookView.vue";
 import DetailBookView from "../views/DetailBookView.vue";
 
 const router = createRouter({
-  history: createWebHistory("http://localhost:5173"),
+  history: createWebHistory("/"),
   routes: [
     {
       path: "/",
