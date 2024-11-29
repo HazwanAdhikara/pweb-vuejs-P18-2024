@@ -8,7 +8,7 @@
         <input
           type="text"
           v-model="book.title"
-          placeholder="Enter book title"
+          placeholder="Enter book title. ex: Dune"
           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           required
         />
@@ -20,7 +20,7 @@
         <input
           type="text"
           v-model="book.author"
-          placeholder="Enter author name"
+          placeholder="Enter author name. ex: Frank Herbert"
           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           required
         />
@@ -45,7 +45,7 @@
         <input
           type="text"
           v-model="book.publisher"
-          placeholder="Enter publisher name"
+          placeholder="Enter publisher name. ex: Ace Books"
           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           required
         />
@@ -58,7 +58,7 @@
         >
         <textarea
           v-model="book.description"
-          placeholder="Enter book description"
+          placeholder="Enter book description. ex: A science fiction epic set on the desert planet Arrakis, following the young Paul Atreides as he navigates a complex interstellar political landscape and becomes the messianic leader of the native Fremen people."
           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           rows="4"
           required
@@ -73,7 +73,7 @@
         <input
           type="url"
           v-model="book.coverImage"
-          placeholder="Enter cover image URL"
+          placeholder="Enter cover image URL. ex: https://example.com/images/dune-cover.jpg"
           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           required
         />
@@ -85,7 +85,7 @@
         <input
           type="text"
           v-model="book.tags"
-          placeholder="Enter tags (comma-separated)"
+          placeholder="Enter tags (comma-separated). ex: Romance, Comedy, Thriller"
           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
           required
         />
@@ -94,7 +94,7 @@
       <!-- Initial Quantity -->
       <div>
         <label class="block text-sm font-medium text-gray-700"
-          >Initial Quantity</label
+          >Maximum Quantity</label
         >
         <input
           type="number"
@@ -107,7 +107,9 @@
 
       <!-- Quantity -->
       <div>
-        <label class="block text-sm font-medium text-gray-700">Quantity</label>
+        <label class="block text-sm font-medium text-gray-700"
+          >Current Quantity</label
+        >
         <input
           type="number"
           v-model="book.qty"
@@ -120,11 +122,13 @@
       <!-- Rating -->
       <div>
         <label class="block text-sm font-medium text-gray-700"
-          >Average Rating</label
+          >Average User Rating</label
         >
         <input
           type="number"
           step="0.1"
+          min="0.1"
+          max="10"
           v-model="book.rating.average"
           placeholder="Enter average rating"
           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"

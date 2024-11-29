@@ -95,128 +95,123 @@ export default defineComponent({
         Back to Home
       </RouterLink>
 
-      <div v-if="isToggled">
-        <Editbook />
-      </div>
-      <div v-else>
-        <!-- Error State -->
-        <div v-if="fetchError" class="text-center py-12">
-          <svg
-            class="mx-auto h-24 w-24 text-red-400 mb-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <h1 class="text-3xl font-bold text-gray-800">
-            Failed to Load Book Data
-          </h1>
-          <p class="text-gray-600 mt-2">Please try again later</p>
-        </div>
-
-        <!-- Book Detail -->
-        <div
-          v-else-if="bookDetail.title"
-          class="bg-white shadow-lg rounded-xl overflow-hidden"
+      <!-- Error State -->
+      <div v-if="fetchError" class="text-center py-12">
+        <svg
+          class="mx-auto h-24 w-24 text-red-400 mb-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
         >
-          <div class="grid md:grid-cols-2 gap-8 p-6 md:p-10">
-            <!-- Book Cover -->
-            <div class="flex items-center justify-center">
-              <img
-                :src="bookDetail.coverImage"
-                class="rounded-lg max-h-[500px] w-auto object-cover shadow-md"
-                alt="Book Cover"
-              />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <h1 class="text-3xl font-bold text-gray-800">
+          Failed to Load Book Data
+        </h1>
+        <p class="text-gray-600 mt-2">Please try again later</p>
+      </div>
+
+      <!-- Book Detail -->
+      <div
+        v-else-if="bookDetail.title"
+        class="bg-white shadow-lg rounded-xl overflow-hidden"
+      >
+        <div class="grid md:grid-cols-2 gap-8 p-6 md:p-10">
+          <!-- Book Cover -->
+          <div class="flex items-center justify-center">
+            <img
+              :src="bookDetail.coverImage"
+              class="rounded-lg max-h-[500px] w-auto object-cover shadow-md"
+              alt="Book Cover"
+            />
+          </div>
+
+          <!-- Book Information -->
+          <div>
+            <h1 class="text-3xl font-extrabold text-gray-900 mb-4">
+              {{ bookDetail.title }}
+            </h1>
+            <h2 class="text-xl text-gray-600 mb-4">
+              by {{ bookDetail.author }}
+            </h2>
+
+            <div class="flex items-center mb-4">
+              <span class="text-yellow-500 mr-2">
+                {{ starRating }} {{ bookDetail.rating.average }}/10
+              </span>
+              <span class="text-gray-500">
+                ({{ bookDetail.rating.count }} reviews)
+              </span>
             </div>
 
-            <!-- Book Information -->
-            <div>
-              <h1 class="text-3xl font-extrabold text-gray-900 mb-4">
-                {{ bookDetail.title }}
-              </h1>
-              <h2 class="text-xl text-gray-600 mb-4">
-                by {{ bookDetail.author }}
-              </h2>
-
-              <div class="flex items-center mb-4">
-                <span class="text-yellow-500 mr-2">
-                  {{ starRating }}
-                </span>
-                <span class="text-gray-500">
-                  ({{ bookDetail.rating.count }} reviews)
-                </span>
+            <div class="space-y-4 text-gray-700">
+              <div>
+                <h3 class="font-semibold text-gray-900">About</h3>
+                <p>{{ bookDetail.description }}</p>
               </div>
 
-              <div class="space-y-4 text-gray-700">
+              <div class="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg">
                 <div>
-                  <h3 class="font-semibold text-gray-900">About</h3>
-                  <p>{{ bookDetail.description }}</p>
+                  <h4 class="font-semibold text-gray-900">Published</h4>
+                  <p>{{ bookDetail.publishedDate }}</p>
+                  <p>{{ bookDetail.publisher }}</p>
                 </div>
-
-                <div class="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg">
-                  <div>
-                    <h4 class="font-semibold text-gray-900">Published</h4>
-                    <p>{{ bookDetail.publishedDate }}</p>
-                    <p>{{ bookDetail.publisher }}</p>
-                  </div>
-                  <div>
-                    <h4 class="font-semibold text-gray-900">Category</h4>
-                    <p>{{ bookDetail.tags.join(", ") }}</p>
-                  </div>
-                </div>
-
-                <div class="bg-blue-50 p-4 rounded-lg">
-                  <h4 class="font-semibold text-blue-900 mb-2">Stock</h4>
-                  <div class="flex items-center">
-                    <div class="w-full bg-blue-200 rounded-full h-2.5 mr-2">
-                      <div
-                        class="bg-blue-600 h-2.5 rounded-full"
-                        :style="`width: ${
-                          (bookDetail.qty / bookDetail.initialQty) * 100
-                        }%`"
-                      ></div>
-                    </div>
-                    <span class="text-blue-800">
-                      {{ bookDetail.qty }}/{{ bookDetail.initialQty }}
-                    </span>
-                  </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900">Category</h4>
+                  <p>{{ bookDetail.tags.join(", ") }}</p>
                 </div>
               </div>
 
-              <!-- Action Buttons -->
-              <div class="mt-6 flex space-x-4">
-                <button
-                  @click="deleteBook"
-                  class="flex-1 bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition-colors"
-                >
-                  Remove Book
-                </button>
-                <button
-                  @click="isToggled = true"
-                  class="flex-1 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors"
-                >
-                  Edit Book
-                </button>
+              <div class="bg-blue-50 p-4 rounded-lg">
+                <h4 class="font-semibold text-blue-900 mb-2">Stock</h4>
+                <div class="flex items-center">
+                  <div class="w-full bg-blue-200 rounded-full h-2.5 mr-2">
+                    <div
+                      class="bg-blue-600 h-2.5 rounded-full"
+                      :style="`width: ${
+                        (bookDetail.qty / bookDetail.initialQty) * 100
+                      }%`"
+                    ></div>
+                  </div>
+                  <span class="text-blue-800">
+                    {{ bookDetail.qty }}/{{ bookDetail.initialQty }}
+                  </span>
+                </div>
               </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-6 flex space-x-4">
+              <button
+                @click="deleteBook"
+                class="flex-1 bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition-colors"
+              >
+                Remove Book
+              </button>
+              <button
+                @click="$router.push(`/detail/${bookDetail._id}/edit`)"
+                class="flex-1 bg-slate-500 text-white py-3 rounded-lg hover:bg-slate-600 transition-colors"
+              >
+                Edit Book
+              </button>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Loading State -->
-        <div v-else class="text-center py-12">
-          <div
-            class="w-12 h-12 border-4 border-blue-500 border-t-4 border-t-transparent rounded-full animate-spin mx-auto mb-4"
-          ></div>
-          <h1 class="text-2xl font-semibold text-gray-700">
-            Loading Book Details...
-          </h1>
-        </div>
+      <!-- Loading State -->
+      <div v-else class="text-center py-12">
+        <div
+          class="w-12 h-12 border-4 border-blue-500 border-t-4 border-t-transparent rounded-full animate-spin mx-auto mb-4"
+        ></div>
+        <h1 class="text-2xl font-semibold text-gray-700">
+          Loading Book Details...
+        </h1>
       </div>
     </div>
   </main>
