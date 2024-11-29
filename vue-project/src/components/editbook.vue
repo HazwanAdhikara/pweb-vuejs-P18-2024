@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="container mx-auto p-4">
     <RouterLink
       :to="`/detail/${$route.params.id}`"
-      class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors ml-32 mt-6 sm:ml-4"
+      class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors mt-6"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -20,120 +20,126 @@
       </svg>
       Back to Details
     </RouterLink>
-    <div class="flex lg:ml-24 gap-x-10 flex-col lg:flex-row mt-8 mx-40 sm:ml-2">
-      <div class="w-full md:w-4/6 ml-20 md:ml-44 lg:w-4/6">
+    <div class="flex flex-col lg:flex-row lg:gap-x-10 mt-8">
+      <!-- Cover Image Section -->
+      <div class="w-full lg:w-1/2">
         <img
           v-if="bookDetails.coverImage"
           :src="bookDetails.coverImage"
-          class="rounded-xl w-[100%]"
+          class="rounded-xl w-full"
           alt="Book Cover"
         />
       </div>
-      <div class="mt-10 lg:mt-0 lg:pr-24 w-full sm:ml-20">
+      <!-- Edit Form Section -->
+      <div class="w-full lg:w-1/2 mt-10 lg:mt-0">
         <h1 class="font-bold text-xl md:text-2xl lg:text-3xl text-center">
           Edit Book: {{ bookTitle }}
         </h1>
-        <hr class="border border-black my-2" />
+        <hr class="border border-black my-4" />
 
-        <div class="mb-4">
-          <label for="title" class="font-bold">Title:</label>
-          <input
-            id="title"
-            type="text"
-            v-model="bookDetails.title"
-            class="w-full border p-2 rounded mt-2"
-            :placeholder="bookDetails.title"
-          />
-        </div>
+        <!-- Form Fields -->
+        <form @submit.prevent="confirmEdit" class="space-y-4">
+          <div>
+            <label for="title" class="font-bold block">Title:</label>
+            <input
+              id="title"
+              type="text"
+              v-model="bookDetails.title"
+              class="w-full border p-2 rounded mt-2"
+              :placeholder="bookDetails.title"
+            />
+          </div>
 
-        <div class="mb-4">
-          <label for="author" class="font-bold">Author:</label>
-          <input
-            id="author"
-            type="text"
-            v-model="bookDetails.author"
-            class="w-full border p-2 rounded mt-2"
-            :placeholder="bookDetails.author"
-          />
-        </div>
+          <div>
+            <label for="author" class="font-bold block">Author:</label>
+            <input
+              id="author"
+              type="text"
+              v-model="bookDetails.author"
+              class="w-full border p-2 rounded mt-2"
+              :placeholder="bookDetails.author"
+            />
+          </div>
 
-        <div class="mb-4">
-          <label for="rating" class="font-bold">Rating:</label>
-          <input
-            id="rating"
-            type="number"
-            v-model="bookDetails.rating.average"
-            min="0.1"
-            max="10"
-            step="0.1"
-            class="w-full border p-2 rounded mt-2"
-            :placeholder="bookDetails.rating.average.toString()"
-          />
-        </div>
-        <div class="mb-4">
-          <label for="tags" class="font-bold">Tags:</label>
-          <input
-            id="tags"
-            type="text"
-            v-model="tagsString"
-            class="w-full border p-2 rounded mt-2"
-            :placeholder="tagsString || 'Enter tags, separated by commas'"
-          />
-        </div>
+          <div>
+            <label for="rating" class="font-bold block">Rating:</label>
+            <input
+              id="rating"
+              type="number"
+              v-model="bookDetails.rating.average"
+              min="0.1"
+              max="10"
+              step="0.1"
+              class="w-full border p-2 rounded mt-2"
+              :placeholder="bookDetails.rating.average.toString()"
+            />
+          </div>
 
-        <div class="mb-4">
-          <label for="description" class="font-bold">Description:</label>
-          <textarea
-            id="description"
-            v-model="bookDetails.description"
-            class="w-full border p-2 rounded mt-2"
-            :placeholder="bookDetails.description"
-          ></textarea>
-        </div>
+          <div>
+            <label for="tags" class="font-bold block">Tags:</label>
+            <input
+              id="tags"
+              type="text"
+              v-model="tagsString"
+              class="w-full border p-2 rounded mt-2"
+              :placeholder="tagsString || 'Enter tags, separated by commas'"
+            />
+          </div>
 
-        <div class="mb-4">
-          <label for="publishedDate" class="font-bold">Published Date:</label>
-          <input
-            id="publishedDate"
-            type="date"
-            v-model="bookDetails.publishedDate"
-            class="w-full border p-2 rounded mt-2"
-            :placeholder="bookDetails.publishedDate"
-          />
-        </div>
+          <div>
+            <label for="description" class="font-bold block">Description:</label>
+            <textarea
+              id="description"
+              v-model="bookDetails.description"
+              class="w-full border p-2 rounded mt-2"
+              :placeholder="bookDetails.description"
+            ></textarea>
+          </div>
 
-        <div class="mb-4">
-          <label for="publisher" class="font-bold">Publisher:</label>
-          <input
-            id="publisher"
-            type="text"
-            v-model="bookDetails.publisher"
-            class="w-full border p-2 rounded mt-2"
-            :placeholder="bookDetails.publisher"
-          />
-        </div>
+          <div>
+            <label for="publishedDate" class="font-bold block">Published Date:</label>
+            <input
+              id="publishedDate"
+              type="date"
+              v-model="bookDetails.publishedDate"
+              class="w-full border p-2 rounded mt-2"
+              :placeholder="bookDetails.publishedDate"
+            />
+          </div>
 
-        <div class="mb-4">
-          <label for="qty" class="font-bold">Stock:</label>
-          <input
-            id="qty"
-            type="number"
-            v-model="bookDetails.qty"
-            :max="bookDetails.initialQty"
-            min="0"
-            class="w-full border p-2 rounded mt-2"
-            :placeholder="bookDetails.qty.toString()"
-          />
-        </div>
+          <div>
+            <label for="publisher" class="font-bold block">Publisher:</label>
+            <input
+              id="publisher"
+              type="text"
+              v-model="bookDetails.publisher"
+              class="w-full border p-2 rounded mt-2"
+              :placeholder="bookDetails.publisher"
+            />
+          </div>
 
-        <div>
-          <button
-            @click="confirmEdit"
-            class="flex bg-green-500 text-white text-xl p-3 px-20 mt-5 mb-10 md:ml-44 rounded-lg hover:bg-green-600 transition-colors"
-          >
-            Confirm
-          </button>
-        </div>
+          <div>
+            <label for="qty" class="font-bold block">Stock:</label>
+            <input
+              id="qty"
+              type="number"
+              v-model="bookDetails.qty"
+              :max="bookDetails.initialQty"
+              min="0"
+              class="w-full border p-2 rounded mt-2"
+              :placeholder="bookDetails.qty.toString()"
+            />
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              class="flex bg-green-500 text-white text-lg md:text-xl py-2 px-8 rounded-lg hover:bg-green-600 transition-colors mx-auto"
+            >
+              Confirm
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
