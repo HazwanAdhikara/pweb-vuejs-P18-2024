@@ -9,7 +9,7 @@
           type="text"
           v-model="book.title"
           placeholder="Enter book title. ex: Dune"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           required
         />
       </div>
@@ -21,7 +21,7 @@
           type="text"
           v-model="book.author"
           placeholder="Enter author name. ex: Frank Herbert"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           required
         />
       </div>
@@ -34,7 +34,7 @@
         <input
           type="date"
           v-model="book.publishedDate"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           required
         />
       </div>
@@ -46,7 +46,7 @@
           type="text"
           v-model="book.publisher"
           placeholder="Enter publisher name. ex: Ace Books"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           required
         />
       </div>
@@ -59,7 +59,7 @@
         <textarea
           v-model="book.description"
           placeholder="Enter book description. ex: A science fiction epic set on the desert planet Arrakis, following the young Paul Atreides as he navigates a complex interstellar political landscape and becomes the messianic leader of the native Fremen people."
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           rows="4"
           required
         ></textarea>
@@ -74,7 +74,7 @@
           type="url"
           v-model="book.coverImage"
           placeholder="Enter cover image URL. ex: https://example.com/images/dune-cover.jpg"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           required
         />
       </div>
@@ -86,7 +86,7 @@
           type="text"
           v-model="book.tags"
           placeholder="Enter tags (comma-separated). ex: Romance, Comedy, Thriller"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           required
         />
       </div>
@@ -100,7 +100,7 @@
           type="number"
           v-model="book.initialQty"
           placeholder="Enter initial quantity"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           required
         />
       </div>
@@ -114,7 +114,7 @@
           type="number"
           v-model="book.qty"
           placeholder="Enter available quantity"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           required
         />
       </div>
@@ -131,7 +131,7 @@
           max="10"
           v-model="book.rating.average"
           placeholder="Enter average rating"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           required
         />
       </div>
@@ -143,7 +143,7 @@
           type="number"
           v-model="book.rating.count"
           placeholder="Enter rating count"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
           required
         />
       </div>
