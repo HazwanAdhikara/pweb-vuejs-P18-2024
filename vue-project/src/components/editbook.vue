@@ -20,9 +20,11 @@
       </svg>
       Back to Details
     </RouterLink>
-    <div class="flex flex-col lg:flex-row lg:gap-x-10 mt-8">
+    <div
+      class="flex flex-col lg:flex-row lg:gap-x-10 my-8 justify-center items-center"
+    >
       <!-- Cover Image Section -->
-      <div class="w-full lg:w-1/2">
+      <div class="w-full lg:w-1/3 sm:w-1/2">
         <img
           v-if="bookDetails.coverImage"
           :src="bookDetails.coverImage"
@@ -87,7 +89,9 @@
           </div>
 
           <div>
-            <label for="description" class="font-bold block">Description:</label>
+            <label for="description" class="font-bold block"
+              >Description:</label
+            >
             <textarea
               id="description"
               v-model="bookDetails.description"
@@ -97,7 +101,9 @@
           </div>
 
           <div>
-            <label for="publishedDate" class="font-bold block">Published Date:</label>
+            <label for="publishedDate" class="font-bold block"
+              >Published Date:</label
+            >
             <input
               id="publishedDate"
               type="date"
